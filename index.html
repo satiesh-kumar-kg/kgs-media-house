@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGS Media House | Experience Trust Excellence</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        accent: '#f59e0b',
+                        brandBlue: '#1B2B4C',
+                        brandGold: '#B8935A'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Custom Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glassmorphism for Navbar */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-primary-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300 shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center h-10 transition-transform hover:scale-105">
+                        <svg viewBox="0 0 200 110" class="h-full w-auto" xmlns="http://www.w3.org/2000/svg" aria-label="KGS Media House Logo">
+                            <!-- Sunburst -->
+                            <g stroke="#B8935A" stroke-width="2.5" stroke-linecap="round">
+                                <line x1="100" y1="32" x2="100" y2="10" />
+                                <line x1="90" y1="34" x2="80" y2="13" />
+                                <line x1="110" y1="34" x2="120" y2="13" />
+                                <line x1="81" y1="37" x2="65" y2="20" />
+                                <line x1="119" y1="37" x2="135" y2="20" />
+                                <line x1="74" y1="43" x2="52" y2="30" />
+                                <line x1="126" y1="43" x2="148" y2="30" />
+                                <line x1="68" y1="49" x2="42" y2="43" />
+                                <line x1="132" y1="49" x2="158" y2="43" />
+                            </g>
+                            <!-- Horizon Line -->
+                            <path d="M 60 55 Q 100 45 140 55" fill="none" stroke="#1B2B4C" stroke-width="2.5" stroke-linecap="round"/>
+                            
+                            <!-- KGS Text -->
+                            <text x="100" y="85" font-family="'Playfair Display', serif" font-size="36" font-weight="700" fill="#1B2B4C" text-anchor="middle">KGS</text>
+                            
+                            <!-- Bar Chart & MEDIA HOUSE -->
+                            <g transform="translate(30, 96)">
+                                <rect x="0" y="7" width="2.5" height="4" fill="#B8935A" rx="0.5"/>
+                                <rect x="4.5" y="3.5" width="2.5" height="7.5" fill="#B8935A" rx="0.5"/>
+                                <rect x="9" y="0" width="2.5" height="11" fill="#B8935A" rx="0.5"/>
+                                <path d="M -2 12 L 14 12" stroke="#B8935A" stroke-width="1" stroke-linecap="round"/>
+                                <text x="18" y="10" font-family="'Playfair Display', serif" font-size="11" font-weight="600" fill="#1B2B4C" letter-spacing="0.25em">MEDIA HOUSE</text>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-sm font-semibold text-slate-600 hover:text-primary-600 transition-colors">Home</a>
+                    <a href="#about" class="text-sm font-semibold text-slate-600 hover:text-primary-600 transition-colors">About</a>
+                    <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-primary-600 transition-colors">Services</a>
+                    <a href="#contact" class="bg-primary-600 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-primary-900 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Let's Talk</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" aria-label="Toggle Menu" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-slate-50">Home</a>
+                <a href="#about" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-slate-50">About</a>
+                <a href="#services" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-slate-50">Services</a>
+                <a href="#contact" class="mobile-link block px-3 py-3 mt-4 text-center rounded-md text-base font-medium bg-primary-600 text-white hover:bg-primary-900">Let's Talk</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-900 text-white">
+        <div class="absolute inset-0 opacity-10">
+            <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M0 40V0H40" fill="none" stroke="currentColor" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid-pattern)"/>
+            </svg>
+        </div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
+            <span class="text-accent font-semibold tracking-[0.2em] text-sm uppercase mb-4 block">Experience &middot; Trust &middot; Excellence</span>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-tight font-serif">
+                Creating value. <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-blue-200">Connecting brands.</span> <br>
+                Inspiring people.
+            </h1>
+            <p class="mt-6 max-w-2xl mx-auto text-xl text-slate-300 mb-10">
+                Your premier partner in comprehensive media planning, corporate brand solutions, and digital excellence.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 rounded-full font-semibold hover:bg-slate-100 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.3)]">Explore Services</a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-transparent border border-slate-500 rounded-full font-semibold hover:bg-slate-800 hover:border-slate-400 transition-all duration-300 flex items-center justify-center gap-2">
+                    Contact Satiesh <i class="ph ph-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6 font-serif">Elevating Brands Through Strategic Vision</h2>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        At KGS Media House, we believe in the power of connection. Led by Satiesh Kumar KG, our consultancy bridges the gap between your brand's potential and your audience's needs.
+                    </p>
+                    <p class="text-lg text-slate-600 mb-8 leading-relaxed">
+                        With a foundation built on Experience, Trust, and Excellence, we navigate the complex media landscape to deliver bespoke strategies that drive real, measurable value for your business.
+                    </p>
+                    <div class="flex items-center gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                        <div class="w-16 h-16 rounded-full bg-primary-100 text-primary-600 flex items-center justify-center flex-shrink-0 text-2xl font-bold">
+                            SK
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900">Satiesh Kumar KG</h4>
+                            <p class="text-slate-500">Founder & Principal Consultant</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative fade-in-up flex justify-center lg:justify-end" style="transition-delay: 200ms;">
+                    <!-- Professional Portrait -->
+                    <div class="relative">
+                        <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary-100 rounded-full blur-2xl opacity-60 z-0"></div>
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-brandGold rounded-full blur-2xl opacity-20 z-0"></div>
+                        <img 
+                            src="profile.jpeg" 
+                            width="1024" height="1536"
+                            loading="lazy"
+                            alt="Satiesh Kumar KG - Founder & Principal Consultant" 
+                            class="relative z-10 w-72 lg:w-80 max-w-sm mx-auto rounded-2xl object-cover shadow-lg border-4 border-white transition-transform duration-500 hover:scale-[1.02]"
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                <span class="text-primary-600 font-semibold tracking-wider text-sm uppercase mb-2 block">Our Expertise</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-6 font-serif">Comprehensive Solutions for Modern Brands</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 fade-in-up group">
+                    <div class="w-14 h-14 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="ph ph-megaphone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Advertising Sales & Media Planning</h3>
+                    <p class="text-slate-600 leading-relaxed">Strategic ad placement and media buying to maximize your reach and optimize your marketing ROI across all channels.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 fade-in-up group" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="ph ph-briefcase"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Corporate Brand Solutions</h3>
+                    <p class="text-slate-600 leading-relaxed">End-to-end brand identity development and corporate communication strategies tailored to establish market dominance.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 fade-in-up group" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="ph ph-calendar-star"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Event Sponsorship & Management</h3>
+                    <p class="text-slate-600 leading-relaxed">Connecting your brand with high-impact events through lucrative sponsorships and flawless on-ground execution.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 fade-in-up group" style="transition-delay: 300ms;">
+                    <div class="w-14 h-14 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="ph ph-devices"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Digital Marketing</h3>
+                    <p class="text-slate-600 leading-relaxed">Data-driven digital campaigns, SEO, and social media strategies designed to boost your online visibility and conversions.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 fade-in-up group" style="transition-delay: 400ms;">
+                    <div class="w-14 h-14 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="ph ph-pen-nib"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Content Creation</h3>
+                    <p class="text-slate-600 leading-relaxed">Engaging, high-quality content tailored to your audience, spanning from copywriting to multimedia production.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-slate-100 fade-in-up group" style="transition-delay: 500ms;">
+                    <div class="w-14 h-14 rounded-xl bg-primary-50 text-primary-600 flex items-center justify-center text-3xl mb-6 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                        <i class="ph ph-book-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Magazine & Publishing Consultancy</h3>
+                    <p class="text-slate-600 leading-relaxed">Expert guidance on publication strategy, editorial direction, print logistics, and digital publishing transformation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary-50 rounded-full blur-3xl opacity-70"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-12">
+                
+                <!-- Contact Info -->
+                <div class="lg:col-span-2 space-y-8 fade-in-up">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4 font-serif">Get in Touch</h2>
+                        <p class="text-slate-600 text-lg">Ready to elevate your brand? Connect with us to discuss how we can create value together.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-600 text-xl flex-shrink-0 mt-1">
+                                <i class="ph-fill ph-user"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-slate-500 font-semibold uppercase tracking-wider mb-1">Contact Person</h4>
+                                <p class="text-lg font-medium text-slate-900">Satiesh Kumar KG</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-600 text-xl flex-shrink-0 mt-1">
+                                <i class="ph-fill ph-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-slate-500 font-semibold uppercase tracking-wider mb-1">Phone</h4>
+                                <a href="tel:+919840968450" class="block text-lg font-medium text-slate-900 hover:text-primary-600 transition-colors">+91 98409 68450</a>
+                                <a href="tel:+919894224641" class="block text-lg font-medium text-slate-900 hover:text-primary-600 transition-colors">+91 98942 24641</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-600 text-xl flex-shrink-0 mt-1">
+                                <i class="ph-fill ph-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-slate-500 font-semibold uppercase tracking-wider mb-1">Email</h4>
+                                <a href="mailto:satiesh.kg@gmail.com" class="text-lg font-medium text-slate-900 hover:text-primary-600 transition-colors break-all">satiesh.kg@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-50 rounded-full flex items-center justify-center text-primary-600 text-xl flex-shrink-0 mt-1">
+                                <i class="ph-fill ph-map-pin"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm text-slate-500 font-semibold uppercase tracking-wider mb-1">Office</h4>
+                                <p class="text-lg font-medium text-slate-900 leading-relaxed">
+                                    38 SREE SAILAM,<br>
+                                    SREE ANNAMALAI NAGAR,<br>
+                                    VILANKURICHI,<br>
+                                    COIMBATORE 641 035
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form (submitted via Google Apps Script) -->
+                <div class="lg:col-span-3 fade-in-up" style="transition-delay: 200ms;">
+                    <div class="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 p-8 md:p-10">
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-slate-700 mb-2">Full Name</label>
+                                    <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50 focus:bg-white" placeholder="Your Name">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-slate-700 mb-2">Email Address</label>
+                                    <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50 focus:bg-white" placeholder="you@company.com">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-slate-700 mb-2">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" autocomplete="tel" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50 focus:bg-white" placeholder="+91 98765 43210">
+                                </div>
+                                <div>
+                                    <label for="subject" class="block text-sm font-medium text-slate-700 mb-2">Subject</label>
+                                    <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50 focus:bg-white" placeholder="How can we help?">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-slate-700 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all bg-slate-50 focus:bg-white resize-none" placeholder="Tell us about your requirements..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-slate-900 text-white font-semibold py-4 rounded-xl hover:bg-primary-600 transition-colors duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-60">
+                                <span>Send Message</span> <i class="ph ph-paper-plane-right"></i>
+                            </button>
+                            <p id="contact-form-status" class="hidden text-sm" role="status" aria-live="polite"></p>
+                            <p class="text-sm text-slate-500">Prefer email? <a href="mailto:satiesh.kg@gmail.com" class="font-medium text-primary-600 hover:underline">Contact us directly</a>.</p>
+                        </form>
+                        <div id="contact-form-responses" class="mt-4 space-y-3"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <!-- Cream Colored Logo Card -->
+                <div class="text-center md:text-left bg-[#FDFBF7] p-5 rounded-xl shadow-lg border border-slate-200">
+                    <div class="flex items-center justify-center md:justify-start h-16">
+                        <svg viewBox="0 0 200 110" class="h-full w-auto" xmlns="http://www.w3.org/2000/svg" aria-label="KGS Media House Logo">
+                            <!-- Sunburst -->
+                            <g stroke="#B8935A" stroke-width="2.5" stroke-linecap="round">
+                                <line x1="100" y1="32" x2="100" y2="10" />
+                                <line x1="90" y1="34" x2="80" y2="13" />
+                                <line x1="110" y1="34" x2="120" y2="13" />
+                                <line x1="81" y1="37" x2="65" y2="20" />
+                                <line x1="119" y1="37" x2="135" y2="20" />
+                                <line x1="74" y1="43" x2="52" y2="30" />
+                                <line x1="126" y1="43" x2="148" y2="30" />
+                                <line x1="68" y1="49" x2="42" y2="43" />
+                                <line x1="132" y1="49" x2="158" y2="43" />
+                            </g>
+                            <!-- Horizon Line -->
+                            <path d="M 60 55 Q 100 45 140 55" fill="none" stroke="#1B2B4C" stroke-width="2.5" stroke-linecap="round"/>
+                            
+                            <!-- KGS Text -->
+                            <text x="100" y="85" font-family="'Playfair Display', serif" font-size="36" font-weight="700" fill="#1B2B4C" text-anchor="middle">KGS</text>
+                            
+                            <!-- Bar Chart & MEDIA HOUSE -->
+                            <g transform="translate(30, 96)">
+                                <rect x="0" y="7" width="2.5" height="4" fill="#B8935A" rx="0.5"/>
+                                <rect x="4.5" y="3.5" width="2.5" height="7.5" fill="#B8935A" rx="0.5"/>
+                                <rect x="9" y="0" width="2.5" height="11" fill="#B8935A" rx="0.5"/>
+                                <path d="M -2 12 L 14 12" stroke="#B8935A" stroke-width="1" stroke-linecap="round"/>
+                                <text x="18" y="10" font-family="'Playfair Display', serif" font-size="11" font-weight="600" fill="#1B2B4C" letter-spacing="0.25em">MEDIA HOUSE</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Social Links with Working LinkedIn -->
+                <div class="flex space-x-6 items-center">
+                    <a href="https://www.linkedin.com/in/satiesh-kumar-58267219/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" class="text-slate-400 hover:text-[#B8935A] transition-colors">
+                        <i class="ph-fill ph-linkedin-logo text-4xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-700 mt-10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+                <p>&copy; <span id="year"></span> KGS Media House. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Experience. Trust. Excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            const menuIcon = btn.querySelector('i');
+
+            function toggleMenu() {
+                menu.classList.toggle('hidden');
+                if (menu.classList.contains('hidden')) {
+                    menuIcon.classList.remove('ph-x');
+                    menuIcon.classList.add('ph-list');
+                } else {
+                    menuIcon.classList.remove('ph-list');
+                    menuIcon.classList.add('ph-x');
+                }
+            }
+
+            btn.addEventListener('click', toggleMenu);
+
+            // Close mobile menu when a link is clicked
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+    
+    <!-- Contact form submits to Google Apps Script without requiring cross-origin fetch access. -->
+    <script>
+      (function () {
+        var form = document.getElementById('contact-form');
+        var responseContainer = document.getElementById('contact-form-responses');
+        var status = document.getElementById('contact-form-status');
+        var submitButton = form.querySelector('button[type="submit"]');
+        var submitLabel = submitButton.querySelector('span');
+        var endpoint = 'https://script.google.com/macros/s/AKfycbwppeDPhx-I8eNkrjSoS-fFy-xZMeV5sthlY3ONE2ZnQZtx9PVX3OZmpSpN8Go_6C6FtA/exec';
+        var activeRequest = null;
+
+        function setStatus(message, style) {
+          status.textContent = message;
+          status.classList.remove('hidden', 'text-green-700', 'text-red-700', 'text-slate-600');
+          status.classList.add(style);
+        }
+
+        function showResponse(request) {
+          if (request.completed) return;
+          request.completed = true;
+          window.clearTimeout(request.timeoutId);
+          if (request.form) request.form.remove();
+
+          request.frame.hidden = false;
+          request.frame.classList.remove('hidden');
+          request.frame.setAttribute('aria-hidden', 'false');
+          request.frame.style.height = '88px';
+          request.frame.dataset.responseComplete = 'true';
+
+          if (activeRequest === request) {
+            activeRequest = null;
+            submitButton.disabled = false;
+            submitLabel.textContent = 'Send Message';
+            setStatus('Google Apps Script responded. See the delivery result below.', 'text-slate-600');
+          } else if (!activeRequest && request.timedOut) {
+            setStatus('A delayed response arrived. See the delivery result below.', 'text-slate-600');
+          }
+        }
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          if (activeRequest) return;
+
+          var requestId = window.crypto && typeof window.crypto.randomUUID === 'function'
+            ? window.crypto.randomUUID()
+            : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2);
+          var request = {
+            frame: null,
+            form: null,
+            timeoutId: null,
+            completed: false,
+            timedOut: false
+          };
+          activeRequest = request;
+          submitButton.disabled = true;
+          submitLabel.textContent = 'Sending...';
+          status.classList.add('hidden');
+
+          request.timeoutId = window.setTimeout(function () {
+            request.timedOut = true;
+            if (activeRequest !== request) return;
+            activeRequest = null;
+            if (request.form) request.form.remove();
+            submitButton.disabled = false;
+            submitLabel.textContent = 'Send Message';
+            setStatus(
+              'We could not confirm delivery. Your message may have been sent; check the delivery result if it appears, or email us directly before retrying.',
+              'text-red-700'
+            );
+          }, 30000);
+
+          try {
+            responseContainer.querySelectorAll('[data-response-complete="true"]').forEach(function (frame) {
+              frame.remove();
+            });
+
+            var responseFrame = document.createElement('iframe');
+            responseFrame.name = 'contact-response-' + requestId;
+            responseFrame.title = 'Contact form delivery result';
+            responseFrame.className = 'hidden w-full border-0';
+            responseFrame.hidden = true;
+            responseFrame.setAttribute('aria-hidden', 'true');
+            request.frame = responseFrame;
+            responseFrame.addEventListener('load', function () {
+              var responseLoaded = false;
+              try {
+                responseLoaded = responseFrame.contentWindow.location.href !== 'about:blank';
+              } catch (error) {
+                responseLoaded = true;
+              }
+              if (responseLoaded) showResponse(request);
+            });
+            responseContainer.appendChild(responseFrame);
+
+            var outgoingForm = document.createElement('form');
+            outgoingForm.method = 'POST';
+            outgoingForm.action = endpoint;
+            outgoingForm.target = responseFrame.name;
+            outgoingForm.hidden = true;
+
+            new FormData(form).forEach(function (value, name) {
+              var input = document.createElement('input');
+              input.type = 'hidden';
+              input.name = name;
+              input.value = value;
+              outgoingForm.appendChild(input);
+            });
+
+            document.body.appendChild(outgoingForm);
+            request.form = outgoingForm;
+            outgoingForm.submit();
+          } catch (error) {
+            console.error('Contact form submission failed:', error);
+            window.clearTimeout(request.timeoutId);
+            request.completed = true;
+            if (request.form) request.form.remove();
+            if (request.frame) request.frame.remove();
+            activeRequest = null;
+            submitButton.disabled = false;
+            submitLabel.textContent = 'Send Message';
+            setStatus('We could not submit your message. Please try again or email us directly.', 'text-red-700');
+          }
+        });
+      })();
+    </script>
+</body>
+</html>
